@@ -2,8 +2,8 @@ project:
   type: book
 
 book:
-  title: "robot1"
-  author: "Norah Jones"
+  title: "Problema del Robot"
+  author: "Jazmin Flores e Irasema Pedroza"
   date: "21/10/2024"
   chapters:
     - index.qmd

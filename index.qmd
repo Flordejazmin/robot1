@@ -1,9 +1,72 @@
-# Preface {.unnumbered}
+# Contexto {.unnumbered}
 
-This is a Quarto book.
+Tenemos un robot en cual tiene dos estados: bateria alta y bateria baja, estos estados sera denotados como high y low respectivamente. Las acciones posibles para el estado low son: buscar, esperar y recargar. En cambio los del estado high son buscar y esperar. El resumen de las probabilidades del robot estan dadas en la siguiente tabla:
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+| s    | a        | s'   | p(s'\| s, a)    | r(s, a, s')  |
+|------|----------|------|--------------|-------------|
+| high | search   | high | α            | r\_search   |
+| high | search   | low  | 1 − α        | r\_search −3|
+| low  | search   | high | 1 − β        | r\_search   |
+| low  | search   | low  | β            | r\_search   |
+| high | wait     | high | 1            | r\_wait     |
+| high | wait     | low  | 0            | −           |
+| low  | wait     | high | 0            | −           |
+| low  | wait     | low  | 1            | r\_wait     |
+| low  | recharge | high | 1            | r\_wait     |
+| low  | recharge | low  | 0            | −           |
 
-```{r}
-1 + 1
-```
+: Demonstration of pipe table syntax
+
+$$v_*(h) = \max \left\{
+\begin{aligned}
+    & p(h \mid h, s)\left[ r(h, s, h) + \gamma v_*(h) \right] + p(l \mid h, s)\left[ r(h, s, l) + \gamma v_*(l) \right], \\
+    & p(h \mid h, w)\left[ r(h, w, h) + \gamma v_*(h) \right] + p(l \mid h, w)\left[ r(h, w, l) + \gamma v_*(l) \right]
+\end{aligned} \right\}
+$$
+
+$$
+= \max \left\{
+\begin{aligned}
+    & \alpha \left[ r_s + \gamma v_*(h) \right] + (1 - \alpha) \left[ r_s + \gamma v_*(l) \right], \\
+    & 1 \left[ r_w + \gamma v_*(h) \right] + 0 \left[ r_w + \gamma v_*(l) \right]
+\end{aligned} \right\}
+$$
+$$= \max \left\{
+\begin{aligned}
+    & r_s + \gamma \left[ \alpha v_*(h) + (1 - \alpha) v_*(l) \right], \\
+    & r_w + \gamma v_*(h)
+\end{aligned} \right\}
+$$
+
+
+$$
+= \max \left\{
+\begin{aligned}
+    & 3 + 0.5 \left[ 0.5 v_*(h) + (0.5) v_*(l) \right], \\
+    & 2 + 0.5 v_*(h)
+\end{aligned} \right\}
+$$
+$$
+= \max \left\{
+\begin{aligned}
+    & 3 + 0.5 \left[ 0.5 v_*(h) + (0.5) v_*(l) \right], \\
+    & 4
+\end{aligned} \right\}
+$$
+
+de igual forma tenemos $v_*(l)$ esta dado por:
+
+$$v_*(l)=\max \{0.5[0.5v_*(h)+0.5v_*(l)],\\
+2+0.5v_*(l),\\
+0.5v_*(h)\}$$
+
+supongamos que el maximo de $v_*(h)$ es $2 + 0.5 v_*(h)$ despejamos y el resultado es $v_*(h)=4$, 
+apartir de este valor podemos obtener $v_*(l)$ el cual es:
+
+$$\begin{aligned}v_*(l)=\max \{&1+0.5v_*(l)],\\
+&2+0.5v_*(l),\\
+&2 \}\end{aligned}$$
+
+Observemos que los unicos canditados son: $2+0.5v_*(l)$ y 2 pero en el caso que si $v_*(l)<0$ tendriamos que $v_*(l)=2$ pero como $2$ no es un numero negativo tenemos que si $v_*(h)=4$ entonces $v_*(l)=2+0.5v_*(l)$
+
+Ahora supondremos que $v_*(h)= 3 + 0.5 \left[ 0.5 v_*(h) + (0.5) v_*(l)\right]$
