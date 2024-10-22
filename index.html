@@ -32,7 +32,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -142,24 +141,6 @@ window.Quarto = {
  <span class="menu-text">Contexto</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -227,36 +208,36 @@ window.Quarto = {
 <td>high</td>
 <td>search</td>
 <td>high</td>
-<td>α</td>
-<td>r_search</td>
+<td><span class="math inline">\(\alpha\)</span>= 0.5</td>
+<td>r_search=3</td>
 </tr>
 <tr class="even">
 <td>high</td>
 <td>search</td>
 <td>low</td>
-<td>1 − α</td>
-<td>r_search −3</td>
+<td><span class="math inline">\(1-\alpha\)</span>=0.5</td>
+<td>r_search= −3</td>
 </tr>
 <tr class="odd">
 <td>low</td>
 <td>search</td>
 <td>high</td>
-<td>1 − β</td>
-<td>r_search</td>
+<td><span class="math inline">\(1-\beta\)</span>=0.5</td>
+<td>r_search =3</td>
 </tr>
 <tr class="even">
 <td>low</td>
 <td>search</td>
 <td>low</td>
-<td>β</td>
-<td>r_search</td>
+<td><span class="math inline">\(\beta\)</span>= 0.5</td>
+<td>r_search=3</td>
 </tr>
 <tr class="odd">
 <td>high</td>
 <td>wait</td>
 <td>high</td>
 <td>1</td>
-<td>r_wait</td>
+<td>r_wait =2</td>
 </tr>
 <tr class="even">
 <td>high</td>
@@ -277,14 +258,14 @@ window.Quarto = {
 <td>wait</td>
 <td>low</td>
 <td>1</td>
-<td>r_wait</td>
+<td>r_wait =2</td>
 </tr>
 <tr class="odd">
 <td>low</td>
 <td>recharge</td>
 <td>high</td>
 <td>1</td>
-<td>r_wait</td>
+<td>r_wait=2</td>
 </tr>
 <tr class="even">
 <td>low</td>
@@ -336,6 +317,10 @@ window.Quarto = {
 &amp;2 \}\end{aligned}\]</span></p>
 <p>Observemos que los unicos canditados son: <span class="math inline">\(2+0.5v_*(l)\)</span> y 2 pero en el caso que si <span class="math inline">\(v_*(l)&lt;0\)</span> tendriamos que <span class="math inline">\(v_*(l)=2\)</span> pero como <span class="math inline">\(2\)</span> no es un numero negativo tenemos que si <span class="math inline">\(v_*(h)=4\)</span> entonces <span class="math inline">\(v_*(l)=2+0.5v_*(l)\)</span></p>
 <p>Ahora supondremos que <span class="math inline">\(v_*(h)= 3 + 0.5 \left[ 0.5 v_*(h) + (0.5) v_*(l)\right]\)</span></p>
+<p>Si <span class="math inline">\(v_*(h)=3+0.25v_*(h)+0.25v_*(l)\)</span>, entonces <span class="math inline">\(v_*(h)=3+0.25 v_*(l)\)</span></p>
+<p>por lo tanto para el estado low tenemos que <span class="math display">\[\begin{aligned}v_*(l)=\max \{&amp;0.25(3+0.25v_*(l))+0.25v_*(l),\\
+&amp;2+0.5v_*(l),\\
+&amp;0.5(3+0.25v_*(l)) \}\end{aligned}\]</span></p>
 
 
 </section>
@@ -761,15 +746,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link" aria-label="Introduction">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

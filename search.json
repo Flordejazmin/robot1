@@ -4,39 +4,9 @@
     "href": "index.html",
     "title": "Problema del Robot",
     "section": "",
-    "text": "Contexto\nTenemos un robot en cual tiene dos estados: bateria alta y bateria baja, estos estados sera denotados como high y low respectivamente. Las acciones posibles para el estado low son: buscar, esperar y recargar. En cambio los del estado high son buscar y esperar. El resumen de las probabilidades del robot estan dadas en la siguiente tabla:\n\nDemonstration of pipe table syntax\n\n\ns\na\ns’\np(s’| s, a)\nr(s, a, s’)\n\n\n\n\nhigh\nsearch\nhigh\nα\nr_search\n\n\nhigh\nsearch\nlow\n1 − α\nr_search −3\n\n\nlow\nsearch\nhigh\n1 − β\nr_search\n\n\nlow\nsearch\nlow\nβ\nr_search\n\n\nhigh\nwait\nhigh\n1\nr_wait\n\n\nhigh\nwait\nlow\n0\n−\n\n\nlow\nwait\nhigh\n0\n−\n\n\nlow\nwait\nlow\n1\nr_wait\n\n\nlow\nrecharge\nhigh\n1\nr_wait\n\n\nlow\nrecharge\nlow\n0\n−\n\n\n\n\\[v_*(h) = \\max \\left\\{\n\\begin{aligned}\n    & p(h \\mid h, s)\\left[ r(h, s, h) + \\gamma v_*(h) \\right] + p(l \\mid h, s)\\left[ r(h, s, l) + \\gamma v_*(l) \\right], \\\\\n    & p(h \\mid h, w)\\left[ r(h, w, h) + \\gamma v_*(h) \\right] + p(l \\mid h, w)\\left[ r(h, w, l) + \\gamma v_*(l) \\right]\n\\end{aligned} \\right\\}\n\\]\n\\[\n= \\max \\left\\{\n\\begin{aligned}\n    & \\alpha \\left[ r_s + \\gamma v_*(h) \\right] + (1 - \\alpha) \\left[ r_s + \\gamma v_*(l) \\right], \\\\\n    & 1 \\left[ r_w + \\gamma v_*(h) \\right] + 0 \\left[ r_w + \\gamma v_*(l) \\right]\n\\end{aligned} \\right\\}\n\\] \\[= \\max \\left\\{\n\\begin{aligned}\n    & r_s + \\gamma \\left[ \\alpha v_*(h) + (1 - \\alpha) v_*(l) \\right], \\\\\n    & r_w + \\gamma v_*(h)\n\\end{aligned} \\right\\}\n\\]\n\\[\n= \\max \\left\\{\n\\begin{aligned}\n    & 3 + 0.5 \\left[ 0.5 v_*(h) + (0.5) v_*(l) \\right], \\\\\n    & 2 + 0.5 v_*(h)\n\\end{aligned} \\right\\}\n\\] \\[\n= \\max \\left\\{\n\\begin{aligned}\n    & 3 + 0.5 \\left[ 0.5 v_*(h) + (0.5) v_*(l) \\right], \\\\\n    & 4\n\\end{aligned} \\right\\}\n\\]\nde igual forma tenemos \\(v_*(l)\\) esta dado por:\n\\[v_*(l)=\\max \\{0.5[0.5v_*(h)+0.5v_*(l)],\\\\\n2+0.5v_*(l),\\\\\n0.5v_*(h)\\}\\]\nsupongamos que el maximo de \\(v_*(h)\\) es \\(2 + 0.5 v_*(h)\\) despejamos y el resultado es \\(v_*(h)=4\\), apartir de este valor podemos obtener \\(v_*(l)\\) el cual es:\n\\[\\begin{aligned}v_*(l)=\\max \\{&1+0.5v_*(l)],\\\\\n&2+0.5v_*(l),\\\\\n&2 \\}\\end{aligned}\\]\nObservemos que los unicos canditados son: \\(2+0.5v_*(l)\\) y 2 pero en el caso que si \\(v_*(l)&lt;0\\) tendriamos que \\(v_*(l)=2\\) pero como \\(2\\) no es un numero negativo tenemos que si \\(v_*(h)=4\\) entonces \\(v_*(l)=2+0.5v_*(l)\\)\nAhora supondremos que \\(v_*(h)= 3 + 0.5 \\left[ 0.5 v_*(h) + (0.5) v_*(l)\\right]\\)",
+    "text": "Contexto\nTenemos un robot en cual tiene dos estados: bateria alta y bateria baja, estos estados sera denotados como high y low respectivamente. Las acciones posibles para el estado low son: buscar, esperar y recargar. En cambio los del estado high son buscar y esperar. El resumen de las probabilidades del robot estan dadas en la siguiente tabla:\n\nDemonstration of pipe table syntax\n\n\ns\na\ns’\np(s’| s, a)\nr(s, a, s’)\n\n\n\n\nhigh\nsearch\nhigh\n\\(\\alpha\\)= 0.5\nr_search=3\n\n\nhigh\nsearch\nlow\n\\(1-\\alpha\\)=0.5\nr_search= −3\n\n\nlow\nsearch\nhigh\n\\(1-\\beta\\)=0.5\nr_search =3\n\n\nlow\nsearch\nlow\n\\(\\beta\\)= 0.5\nr_search=3\n\n\nhigh\nwait\nhigh\n1\nr_wait =2\n\n\nhigh\nwait\nlow\n0\n−\n\n\nlow\nwait\nhigh\n0\n−\n\n\nlow\nwait\nlow\n1\nr_wait =2\n\n\nlow\nrecharge\nhigh\n1\nr_wait=2\n\n\nlow\nrecharge\nlow\n0\n−\n\n\n\n\\[v_*(h) = \\max \\left\\{\n\\begin{aligned}\n    & p(h \\mid h, s)\\left[ r(h, s, h) + \\gamma v_*(h) \\right] + p(l \\mid h, s)\\left[ r(h, s, l) + \\gamma v_*(l) \\right], \\\\\n    & p(h \\mid h, w)\\left[ r(h, w, h) + \\gamma v_*(h) \\right] + p(l \\mid h, w)\\left[ r(h, w, l) + \\gamma v_*(l) \\right]\n\\end{aligned} \\right\\}\n\\]\n\\[\n= \\max \\left\\{\n\\begin{aligned}\n    & \\alpha \\left[ r_s + \\gamma v_*(h) \\right] + (1 - \\alpha) \\left[ r_s + \\gamma v_*(l) \\right], \\\\\n    & 1 \\left[ r_w + \\gamma v_*(h) \\right] + 0 \\left[ r_w + \\gamma v_*(l) \\right]\n\\end{aligned} \\right\\}\n\\] \\[= \\max \\left\\{\n\\begin{aligned}\n    & r_s + \\gamma \\left[ \\alpha v_*(h) + (1 - \\alpha) v_*(l) \\right], \\\\\n    & r_w + \\gamma v_*(h)\n\\end{aligned} \\right\\}\n\\]\n\\[\n= \\max \\left\\{\n\\begin{aligned}\n    & 3 + 0.5 \\left[ 0.5 v_*(h) + (0.5) v_*(l) \\right], \\\\\n    & 2 + 0.5 v_*(h)\n\\end{aligned} \\right\\}\n\\] \\[\n= \\max \\left\\{\n\\begin{aligned}\n    & 3 + 0.5 \\left[ 0.5 v_*(h) + (0.5) v_*(l) \\right], \\\\\n    & 4\n\\end{aligned} \\right\\}\n\\]\nde igual forma tenemos \\(v_*(l)\\) esta dado por:\n\\[v_*(l)=\\max \\{0.5[0.5v_*(h)+0.5v_*(l)],\\\\\n2+0.5v_*(l),\\\\\n0.5v_*(h)\\}\\]\nsupongamos que el maximo de \\(v_*(h)\\) es \\(2 + 0.5 v_*(h)\\) despejamos y el resultado es \\(v_*(h)=4\\), apartir de este valor podemos obtener \\(v_*(l)\\) el cual es:\n\\[\\begin{aligned}v_*(l)=\\max \\{&1+0.5v_*(l)],\\\\\n&2+0.5v_*(l),\\\\\n&2 \\}\\end{aligned}\\]\nObservemos que los unicos canditados son: \\(2+0.5v_*(l)\\) y 2 pero en el caso que si \\(v_*(l)&lt;0\\) tendriamos que \\(v_*(l)=2\\) pero como \\(2\\) no es un numero negativo tenemos que si \\(v_*(h)=4\\) entonces \\(v_*(l)=2+0.5v_*(l)\\)\nAhora supondremos que \\(v_*(h)= 3 + 0.5 \\left[ 0.5 v_*(h) + (0.5) v_*(l)\\right]\\)\nSi \\(v_*(h)=3+0.25v_*(h)+0.25v_*(l)\\), entonces \\(v_*(h)=3+0.25 v_*(l)\\)\npor lo tanto para el estado low tenemos que \\[\\begin{aligned}v_*(l)=\\max \\{&0.25(3+0.25v_*(l))+0.25v_*(l),\\\\\n&2+0.5v_*(l),\\\\\n&0.5(3+0.25v_*(l)) \\}\\end{aligned}\\]",
     "crumbs": [
       "Contexto"
-    ]
-  },
-  {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "2  Summary",
-    "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "References"
     ]
   }
 ]
